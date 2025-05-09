@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\DeathZone.cs" />
     <Compile Include="Assets\Scripts\Brick.cs" />
     <Compile Include="Assets\Scripts\BestScoreText.cs" />
+    <Compile Include="Assets\Scripts\NameInputText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

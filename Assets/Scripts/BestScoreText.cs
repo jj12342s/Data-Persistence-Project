@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -18,10 +19,17 @@ public class BestScoreText : MonoBehaviour
         public string TopPerson;
         public int HighScore;
     }
-    public void SaveScore(string TopPerson, int HighScore)
+    public void Save_Name(string name)
+    {
+        Debug.Log(name);
+        current_name = name;
+        score += 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void SaveScore(int HighScore)
     {
         SaveData data = new SaveData();
-        data.TopPerson = TopPerson;
+        data.TopPerson = current_name;
         data.HighScore = HighScore;
 
         string json = JsonUtility.ToJson(data);
@@ -45,18 +53,28 @@ public class BestScoreText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         LoadScore();
         text.text = leader + ":" + score;
     }
     void Start_Game(string name)
     {
         current_name = name;
-        //go to next scene and make this object not die between scenes
+        Debug.Log(name);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void Game_End(int points)
+    {
+        if (score < points)
+        {
+
+            SaveScore(points);
+        }
     }
 }
